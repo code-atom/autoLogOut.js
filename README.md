@@ -1,0 +1,1 @@
+# autoLogOut.js
