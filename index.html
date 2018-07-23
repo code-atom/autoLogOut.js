@@ -20,29 +20,22 @@
         </ol>
         All events are throttle with setTimeOut.
     </p>
-    <p>In this solution, we have two calculation, this calculation provide a consistent timeout, across all tabs
-        <ol>
-            <li> Timeout Difference = LastUserActivity - CurrentDateTime</li>
-            <li> Warning Difference = TimeOutDifference - WarningTime</li>
-        </ol>   
-    </p>
     <p>For implementation</p>
     <pre> 
-        var signOut = new autoSignOut();
-        signOut.init({ timeout: 1, sessionKey: 'Key', debug: true })
-        signOut.onSignOut = function () {
-            alert("Called Timeout");
-            console.log("Timeout Called");
-        }
+       var signOut = autoSignOut.init({ timeout: 1, sessionKey: 'Key', debug: true});
+       signOut.onSignOut = function () {
+           alert("Called Timeout");
+           console.log("Timeout Called");
+       }
     </pre>
-    <p>signOut.init() function take intial configuration object, each key description mentioned below:-</p>
+    <p>autoSignOut.init() function take intial configuration object, each key description mentioned below:-</p>
     <pre>
         timeout: number of minutes after that session will auto logout
         sessionKey: name of the localstorage key
         debug: console.log on event called and timeout registration.
     </pre>
     <p>
-        autoSignOut.js have four methods:-
+        autoSignOut.js have three methods:-
         <ol>
             <li>init : initial configuration function</li>
             <li>signOut: mannual call the onSignOut callback</li>
