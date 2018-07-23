@@ -36,4 +36,7 @@ signOut.onSignOut = function () {
         <li>onSignOut: this callback callback on logout</li>
     </ul>
 </p>
+
+Related Content:-
+    - https://stackoverflow.com/questions/28230845/communication-between-tabs-or-windows
   
