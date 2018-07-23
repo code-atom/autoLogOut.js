@@ -1,16 +1,17 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>AutoSignOut.js</title>
+    <title>AutoLogOut.js</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body>
-    <h1>autoSignOut.js</h1>
+<body class="container">
+    <h1>autoLogOut.js</h1>
     <p>Use localstorage for update the last user activity with unix-timestamp</p>
     <p><a href="https://stackoverflow.com/questions/6585112/javascript-performance-when-running-in-an-unfocused-tab">Browser Issue</a></p>
     <p>
-        autoSignOut.js implements the event listener on following events:-
-        <ol>
+        <strong>autoLogOut.js</strong> implements the event listener on following events:-
+        <ol >
             <li>Document ready</li>
             <li>Document unload</li>
             <li>Mouse movement</li>
@@ -18,37 +19,37 @@
             <li>Window resize</li>
             <li>Storage change</li>
         </ol>
-        All events are throttle with setTimeOut.
+        All events are throttle with setTimeout approach, except storage change.
     </p>
-    <p>For implementation</p>
-    <pre> 
-       var signOut = autoSignOut.init({ timeout: 1, sessionKey: 'Key', debug: true});
-       signOut.onSignOut = function () {
-           alert("Called Timeout");
-           console.log("Timeout Called");
-       }
-    </pre>
-    <p>autoSignOut.init() function take intial configuration object, each key description mentioned below:-</p>
-    <pre>
-        timeout: number of minutes after that session will auto logout
-        sessionKey: name of the localstorage key
-        debug: console.log on event called and timeout registration.
-    </pre>
+    <p>For implementation: </p>
+
+    <pre class="alert alert-dark">
+var signOut = autoLogOut.init({ timeout: 1, sessionKey: 'Key', debug: true});
+signOut.onSignOut = function () {
+    alert("Called Timeout");
+    console.log("Timeout Called");
+};</pre>
+    <p> <strong>autoLogOut.init()</strong> function take intial configuration object, each key description mentioned below:-</p>
+    <ul>
+        <li>timeout: number of minutes after that session will auto logout</li>
+        <li>sessionKey: name of the localstorage key</li>
+        <li>debug: console.log on event and timeout registration.</li>
+    </ul>
     <p>
-        autoSignOut.js have three methods:-
-        <ol>
+        <strong>autoLogOut.js</strong> have three methods:-
+        <ul>
             <li>init : initial configuration function</li>
-            <li>signOut: mannual call the onSignOut callback</li>
+            <li>signOut: manual call the onSignOut callback</li>
             <li>onSignOut: this callback callback on logout</li>
-        </ol>
+        </ul>
     </p>
-    <script src="autoSignOut.js"></script>
+    <script src="autoLogOut.js"></script>
     <script>
-        var signOut = autoSignOut.init({ timeout: 1, sessionKey: 'Key', debug: true})
+        var signOut = autoLogOut.init({ timeout: 1, sessionKey: 'Key', debug: true })
         signOut.onSignOut = function () {
             alert("Called Timeout");
             console.log("Timeout Called");
-        }
+        };
     </script>
 </body>
 </html>
