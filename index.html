@@ -2,31 +2,60 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>AutoSignOut.js</title>
 </head>
 <body>
-    <button onclick="fireXmlRequest()">Fire Request</button>
+    <h1>autoSignOut.js</h1>
+    <p>Use localstorage for update the last user activity with unix-timestamp</p>
+    <p><a href="https://stackoverflow.com/questions/6585112/javascript-performance-when-running-in-an-unfocused-tab">Browser Issue</a></p>
+    <p>
+        autoSignOut.js implements the event listener on following events:-
+        <ol>
+            <li>Document ready</li>
+            <li>Document unload</li>
+            <li>Mouse movement</li>
+            <li>Scroll event</li>
+            <li>Window resize</li>
+            <li>Storage change</li>
+        </ol>
+        All events are throttle with setTimeOut.
+    </p>
+    <p>In this solution, we have two calculation, this calculation provide a consistent timeout, across all tabs
+        <ol>
+            <li> Timeout Difference = LastUserActivity - CurrentDateTime</li>
+            <li> Warning Difference = TimeOutDifference - WarningTime</li>
+        </ol>   
+    </p>
+    <p>For implementation</p>
+    <pre> 
+        var signOut = new autoSignOut();
+        signOut.init({ timeout: 1, sessionKey: 'Key', debug: true })
+        signOut.onSignOut = function () {
+            alert("Called Timeout");
+            console.log("Timeout Called");
+        }
+    </pre>
+    <p>signOut.init() function take intial configuration object, each key description mentioned below:-</p>
+    <pre>
+        timeout: number of minutes after that session will auto logout
+        sessionKey: name of the localstorage key
+        debug: console.log on event called and timeout registration.
+    </pre>
+    <p>
+        autoSignOut.js have four methods:-
+        <ol>
+            <li>init : initial configuration function</li>
+            <li>signOut: mannual call the onSignOut callback</li>
+            <li>onSignOut: this callback callback on logout</li>
+        </ol>
+    </p>
+    <script src="autoSignOut.js"></script>
+    <script>
+        var signOut = autoSignOut.init({ timeout: 1, sessionKey: 'Key', debug: true})
+        signOut.onSignOut = function () {
+            alert("Called Timeout");
+            console.log("Timeout Called");
+        }
+    </script>
 </body>
-<script src="SignOut.js"></script>
-<script>
-    function fireXmlRequest() {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log("Done")
-            }
-        };
-        xhttp.open("GET", "http://www.goole.com", true);
-        xhttp.send();
-    }
-    var signOut = new SignOut();
-    signOut.init({ timeout: 1, sessionKey: 'Key', debug: true, warning: 0.5 })
-    signOut.onBeforeTimeout = function (number) {
-        console.log("You below this waring zone " + number/1000);
-    }
-    signOut.onTimeout = function () {
-        alert("Called Timeout");
-        console.log("Timeout Called");
-    }
-</script>
 </html>
